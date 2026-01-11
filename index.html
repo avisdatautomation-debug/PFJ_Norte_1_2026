@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Jovens</title>
+    <title>Registro de Jóvenes</title>
     <style>
         * {
             margin: 0;
@@ -200,11 +201,11 @@
 </head>
 <body>
     <div class="container">
-        <h1>📋 Cadastro de Jovens</h1>
-        <p class="subtitle">Digite o nome para buscar informações</p>
+        <h1>📋 Registro de Jóvenes</h1>
+        <p class="subtitle">Escribe el nombre para buscar información</p>
 
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Comece a digitar o nome...">
+            <input type="text" id="searchInput" placeholder="Comienza a escribir el nombre...">
             <div id="suggestions" class="suggestions"></div>
         </div>
 
@@ -212,8 +213,7 @@
     </div>
 
     <script>
-        // COLE SEUS DADOS AQUI - Substitua este array com os dados do Excel
-        const jovens = [
+        const jovenes = [
  {
    "Nombre de pila": "Victor Manuel",
    "Apellido": "Choque Veizaga",
@@ -12649,7 +12649,7 @@
                 return;
             }
 
-            const matches = jovens.filter(person => {
+            const matches = jovenes.filter(person => {
                 const fullName = `${person['Nombre de pila']} ${person['Apellido']}`.toLowerCase();
                 const preferredName = (person['Nombre que se prefiere'] || '').toLowerCase();
                 return fullName.includes(query) || preferredName.includes(query);
@@ -12659,11 +12659,11 @@
                 suggestionsDiv.innerHTML = matches.map(person => {
                     const displayName = person['Nombre que se prefiere'] || 
                                       `${person['Nombre de pila']} ${person['Apellido']}`;
-                    return `<div class="suggestion-item" data-index="${jovens.indexOf(person)}">${displayName}</div>`;
+                    return `<div class="suggestion-item" data-index="${jovenes.indexOf(person)}">${displayName}</div>`;
                 }).join('');
                 suggestionsDiv.classList.add('show');
             } else {
-                suggestionsDiv.innerHTML = '<div class="no-results">Nenhum resultado encontrado</div>';
+                suggestionsDiv.innerHTML = '<div class="no-results">No se encontraron resultados</div>';
                 suggestionsDiv.classList.add('show');
             }
         });
@@ -12671,7 +12671,7 @@
         suggestionsDiv.addEventListener('click', function(e) {
             if (e.target.classList.contains('suggestion-item')) {
                 const index = e.target.dataset.index;
-                showPersonDetails(jovens[index]);
+                showPersonDetails(jovenes[index]);
                 searchInput.value = e.target.textContent;
                 suggestionsDiv.classList.remove('show');
             }
@@ -12683,20 +12683,20 @@
             
             let html = `<div class="person-name">${displayName}</div>`;
             
-            // Informações Pessoais
+            // Información Personal
             html += `
                 <div class="info-section">
-                    <div class="section-title">Informações Pessoais</div>
+                    <div class="section-title">Información Personal</div>
                     <div class="info-row">
-                        <div class="info-label">Nome Completo:</div>
+                        <div class="info-label">Nombre Completo:</div>
                         <div class="info-value">${person['Nombre de pila']} ${person['Apellido']}</div>
                     </div>
                     <div class="info-row">
-                        <div class="info-label">Aniversário:</div>
+                        <div class="info-label">Cumpleaños:</div>
                         <div class="info-value">${person['Cumpleaños'] || '-'}</div>
                     </div>
                     <div class="info-row">
-                        <div class="info-label">Idade:</div>
+                        <div class="info-label">Edad:</div>
                         <div class="info-value">${person['Edad'] || '-'}</div>
                     </div>
                     <div class="info-row">
@@ -12704,25 +12704,25 @@
                         <div class="info-value">${person['Sexo'] || '-'}</div>
                     </div>
                     <div class="info-row">
-                        <div class="info-label">Telefone:</div>
+                        <div class="info-label">Teléfono:</div>
                         <div class="info-value">${person['Teléfono'] || '-'}</div>
                     </div>
                     <div class="info-row">
-                        <div class="info-label">Email:</div>
+                        <div class="info-label">Correo electrónico:</div>
                         <div class="info-value">${person['Correo electrónico'] || '-'}</div>
                     </div>
                     <div class="info-row">
-                        <div class="info-label">Tamanho Camiseta:</div>
+                        <div class="info-label">Talla de camiseta:</div>
                         <div class="info-value">${person['Talla de camiseta'] || '-'}</div>
                     </div>
                 </div>
             `;
 
-            // Informações Médicas e Alimentares
+            // Información Médica y Alimentaria
             if (person['Información médica'] || person['Información alimentaria']) {
                 html += `
                     <div class="info-section">
-                        <div class="section-title">Informações Médicas e Alimentares</div>
+                        <div class="section-title">Información Médica y Alimentaria</div>
                         ${person['Información médica'] ? `
                         <div class="info-row">
                             <div class="info-label">Info Médica:</div>
@@ -12730,27 +12730,27 @@
                         </div>` : ''}
                         ${person['Información alimentaria'] ? `
                         <div class="info-row">
-                            <div class="info-label">Info Alimentar:</div>
+                            <div class="info-label">Info Alimentaria:</div>
                             <div class="info-value">${person['Información alimentaria']}</div>
                         </div>` : ''}
                     </div>
                 `;
             }
 
-            // Contatos de Emergência
+            // Contactos de Emergencia
             html += `<div class="info-section">
-                <div class="section-title">Contatos de Emergência</div>`;
+                <div class="section-title">Contactos de Emergencia</div>`;
             
             if (person['Nombre del contacto 1']) {
                 html += `
                     <div class="contact-card">
                         <div class="contact-name">📞 ${person['Nombre del contacto 1']}</div>
                         ${person['Teléfonodelcontacto1'] ? `<div class="info-row">
-                            <div class="info-label">Telefone:</div>
+                            <div class="info-label">Teléfono:</div>
                             <div class="info-value">${person['Teléfonodelcontacto1']}</div>
                         </div>` : ''}
                         ${person['Correo electrónico del contacto 1'] ? `<div class="info-row">
-                            <div class="info-label">Email:</div>
+                            <div class="info-label">Correo electrónico:</div>
                             <div class="info-value">${person['Correo electrónico del contacto 1']}</div>
                         </div>` : ''}
                     </div>
@@ -12762,11 +12762,11 @@
                     <div class="contact-card">
                         <div class="contact-name">📞 ${person['Nombre del contacto 2']}</div>
                         ${person['Teléfono del contacto 2'] ? `<div class="info-row">
-                            <div class="info-label">Telefone:</div>
+                            <div class="info-label">Teléfono:</div>
                             <div class="info-value">${person['Teléfono del contacto 2']}</div>
                         </div>` : ''}
                         ${person['Correo electrónico del contacto 2'] ? `<div class="info-row">
-                            <div class="info-label">Email:</div>
+                            <div class="info-label">Correo electrónico:</div>
                             <div class="info-value">${person['Correo electrónico del contacto 2']}</div>
                         </div>` : ''}
                     </div>
@@ -12774,32 +12774,32 @@
             }
             html += `</div>`;
 
-            // Informações da Igreja
+            // Información de la Iglesia
             html += `
                 <div class="info-section">
-                    <div class="section-title">Informações da Igreja</div>
+                    <div class="section-title">Información de la Iglesia</div>
                     <div class="info-row">
                         <div class="info-label">Estaca/Distrito:</div>
                         <div class="info-value">${person['Nombre de la estaca o distrito'] || '-'}</div>
                     </div>
                     <div class="info-row">
-                        <div class="info-label">Ala/Ramo:</div>
+                        <div class="info-label">Barrio/Rama:</div>
                         <div class="info-value">${person['Nombre del barrio o rama'] || '-'}</div>
                     </div>
                     <div class="info-row">
-                        <div class="info-label">Bispo:</div>
+                        <div class="info-label">Obispo:</div>
                         <div class="info-value">${person['Nombre del obispo'] || '-'}</div>
                     </div>
                     ${person['Teléfonodelobispo'] ? `<div class="info-row">
-                        <div class="info-label">Tel. Bispo:</div>
+                        <div class="info-label">Tel. Obispo:</div>
                         <div class="info-value">${person['Teléfonodelobispo']}</div>
                     </div>` : ''}
                     ${person['Correo electrónico del obispo'] ? `<div class="info-row">
-                        <div class="info-label">Email Bispo:</div>
+                        <div class="info-label">Email Obispo:</div>
                         <div class="info-value">${person['Correo electrónico del obispo']}</div>
                     </div>` : ''}
                     <div class="info-row">
-                        <div class="info-label">Companhia:</div>
+                        <div class="info-label">Compañía:</div>
                         <div class="info-value">${person['Compania'] || '-'}</div>
                     </div>
                 </div>
@@ -12809,7 +12809,7 @@
             personCard.classList.add('show');
         }
 
-        // Fechar sugestões ao clicar fora
+        // Cerrar sugerencias al hacer clic fuera
         document.addEventListener('click', function(e) {
             if (!searchInput.contains(e.target) && !suggestionsDiv.contains(e.target)) {
                 suggestionsDiv.classList.remove('show');
